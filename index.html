@@ -1,0 +1,3309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>EV MOTION | Electric Vehicles</title>
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --blue:#1769d1;
+    --dark:#101820;
+    --dark2:#18232e;
+    --light:#f5f7fa;
+    --white:#fff;
+    --grey:#667085;
+    --border:#e1e5ea;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--light);
+    color:var(--dark);
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:75px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+    z-index:9999;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:var(--blue);
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--dark);
+    font-size:14px;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    color:var(--blue);
+}
+
+.nav-book{
+    background:var(--dark);
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:25px;
+    font-weight:bold;
+}
+
+.menu{
+    display:none;
+    font-size:27px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    padding:130px 6% 70px;
+
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    align-items:center;
+    gap:40px;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(245,247,250,1),
+        rgba(245,247,250,.88),
+        rgba(245,247,250,.30)
+    ),
+    url("images/m1.png");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-small{
+    color:var(--blue);
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:3px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(48px,7vw,90px);
+    line-height:.9;
+    margin-bottom:25px;
+}
+
+.hero h1 span{
+    color:var(--blue);
+}
+
+.hero p{
+    max-width:500px;
+    color:var(--grey);
+    font-size:18px;
+    line-height:1.7;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:30px;
+}
+
+.primary{
+    background:var(--blue);
+    color:white;
+    border:none;
+    padding:15px 27px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.secondary{
+    background:white;
+    border:1px solid #ccd3db;
+    padding:15px 27px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.hero-car{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero-car img{
+    width:100%;
+    max-height:550px;
+    object-fit:contain;
+
+    filter:
+    drop-shadow(0 30px 30px rgba(0,0,0,.18));
+
+    animation:heroFloat 6s ease-in-out infinite;
+}
+
+@keyframes heroFloat{
+
+    0%,100%{
+        transform:translateY(0) rotateY(-2deg);
+    }
+
+    50%{
+        transform:translateY(-10px) rotateY(2deg);
+    }
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+    padding:100px 6%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title small{
+    color:var(--blue);
+    letter-spacing:3px;
+    font-weight:bold;
+}
+
+.section-title h2{
+    font-size:45px;
+    margin-top:10px;
+}
+
+.section-title p{
+    color:var(--grey);
+    margin-top:12px;
+}
+
+
+/* =========================
+   VEHICLE CARDS
+========================= */
+
+.vehicle-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.vehicle-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+
+    box-shadow:
+    0 10px 35px rgba(0,0,0,.07);
+
+    transition:
+    transform .4s ease,
+    box-shadow .4s ease;
+
+    perspective:1000px;
+}
+
+.vehicle-card:hover{
+    transform:
+    translateY(-8px)
+    rotateX(1deg)
+    rotateY(-1deg);
+
+    box-shadow:
+    0 25px 55px rgba(0,0,0,.13);
+}
+
+.vehicle-image{
+    height:240px;
+    background:#eef1f4;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.vehicle-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    transition:transform 1.2s ease;
+
+    animation:
+    slowRotate 10s ease-in-out infinite;
+}
+
+@keyframes slowRotate{
+
+    0%,100%{
+        transform:scale(1) rotateY(-2deg);
+    }
+
+    50%{
+        transform:scale(1.025) rotateY(2deg);
+    }
+}
+
+.vehicle-card:hover .vehicle-image img{
+    animation-play-state:paused;
+}
+
+.vehicle-info{
+    padding:25px;
+}
+
+.vehicle-info h3{
+    font-size:23px;
+    margin-bottom:8px;
+}
+
+.vehicle-info p{
+    color:var(--grey);
+    font-size:14px;
+    line-height:1.5;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin:20px 0;
+}
+
+.stat{
+    background:#f5f7fa;
+    padding:12px 4px;
+    border-radius:8px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:14px;
+}
+
+.stat span{
+    color:var(--grey);
+    font-size:10px;
+}
+
+.card-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.card-button{
+    padding:13px;
+    border:none;
+    background:var(--dark);
+    color:white;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.review-button{
+    padding:13px;
+    border:1px solid var(--border);
+    background:white;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   CUSTOMIZER
+========================= */
+
+.customizer{
+    background:var(--dark);
+    color:white;
+}
+
+.customizer .section-title small{
+    color:#5ca8ff;
+}
+
+.customizer .section-title h2{
+    color:white;
+}
+
+.customizer-box{
+    max-width:1200px;
+    margin:auto;
+    padding:35px;
+    border-radius:25px;
+
+    background:var(--dark2);
+
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:40px;
+}
+
+.preview{
+    min-height:400px;
+    border-radius:20px;
+    background:#edf0f3;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.preview img{
+    width:95%;
+    max-height:370px;
+    object-fit:contain;
+
+    mix-blend-mode:multiply;
+
+    animation:
+    previewRotate 9s ease-in-out infinite;
+}
+
+@keyframes previewRotate{
+
+    0%,100%{
+        transform:scale(1) rotateY(-2deg);
+    }
+
+    50%{
+        transform:scale(1.025) rotateY(2deg);
+    }
+}
+
+.selected-summary{
+    background:white;
+    color:var(--dark);
+    padding:18px;
+    border-radius:14px;
+    margin-top:15px;
+}
+
+.selected-summary h3{
+    margin-bottom:7px;
+}
+
+.selected-summary p{
+    color:var(--grey);
+    font-size:13px;
+    margin-top:5px;
+}
+
+.options label{
+    display:block;
+    font-size:13px;
+    margin-top:17px;
+    margin-bottom:7px;
+}
+
+.options select{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+}
+
+.color-options{
+    display:flex;
+    gap:12px;
+}
+
+.color{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    border:3px solid white;
+
+    box-shadow:
+    0 0 0 1px #667085;
+}
+
+.black{background:#111;}
+.white{background:#f4f4f4;}
+.blue{background:#173b69;}
+.red{background:#9d1720;}
+.grey{background:#777;}
+
+.price-box{
+    margin-top:25px;
+    padding:20px;
+    background:#101820;
+    border-radius:12px;
+}
+
+.price-box > span{
+    color:#aab4c0;
+    font-size:12px;
+}
+
+.price{
+    color:white;
+    font-size:30px;
+    font-weight:900;
+    margin-top:5px;
+}
+
+.customize-book{
+    width:100%;
+    margin-top:20px;
+}
+
+.save-button{
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+
+    background:transparent;
+    color:white;
+
+    border:1px solid #667085;
+    border-radius:8px;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.feature{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.04);
+}
+
+.feature-icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.feature h3{
+    margin-bottom:10px;
+}
+
+.feature p{
+    color:var(--grey);
+    font-size:14px;
+    line-height:1.5;
+}
+
+
+/* =========================
+   REVIEWS
+========================= */
+
+.reviews-section{
+    background:#eef2f6;
+}
+
+.review-layout{
+    max-width:1100px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:30px;
+}
+
+.review-summary{
+    background:var(--dark);
+    color:white;
+    padding:35px;
+    border-radius:20px;
+}
+
+.big-rating{
+    font-size:55px;
+    font-weight:900;
+}
+
+.stars{
+    color:#f6b800;
+    font-size:24px;
+    letter-spacing:3px;
+}
+
+.review-summary p{
+    color:#b8c1cc;
+    margin-top:10px;
+}
+
+.review-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+    max-height:500px;
+    overflow:auto;
+}
+
+.review-card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.05);
+}
+
+.review-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+}
+
+.review-name{
+    font-weight:bold;
+}
+
+.review-date{
+    color:#98a2b3;
+    font-size:11px;
+}
+
+.review-text{
+    color:var(--grey);
+    font-size:14px;
+    line-height:1.5;
+}
+
+.car-review-title{
+    color:var(--blue);
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+
+/* =========================
+   REVIEW FORM
+========================= */
+
+.review-form{
+    max-width:800px;
+    margin:50px auto 0;
+
+    background:white;
+    padding:30px;
+    border-radius:20px;
+}
+
+.rating-input{
+    display:flex;
+    gap:7px;
+    margin:10px 0 20px;
+}
+
+.rating-input span{
+    font-size:28px;
+    cursor:pointer;
+    color:#cbd5e1;
+}
+
+.rating-input span.active{
+    color:#f6b800;
+}
+
+.form-control{
+    width:100%;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
+textarea.form-control{
+    min-height:120px;
+    resize:vertical;
+}
+
+.submit-review{
+    background:var(--blue);
+    color:white;
+    border:none;
+    padding:14px 25px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   BOOKING
+========================= */
+
+.booking{
+    background:white;
+}
+
+.booking-box{
+    max-width:900px;
+    margin:auto;
+
+    background:#f5f7fa;
+    padding:35px;
+    border-radius:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select{
+    padding:14px;
+    border:1px solid #d0d5dd;
+    border-radius:8px;
+    background:white;
+}
+
+
+/* =========================
+   PAYMENT
+========================= */
+
+.payment-box{
+    margin-top:30px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    border:1px solid var(--border);
+}
+
+.payment-box h3{
+    margin-bottom:15px;
+}
+
+.payment-options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.payment-option{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:15px;
+    cursor:pointer;
+}
+
+.payment-option:hover{
+    border-color:var(--blue);
+    background:#f5f9ff;
+}
+
+.payment-option input{
+    margin-right:8px;
+}
+
+.payment-option strong{
+    display:block;
+    margin-top:5px;
+}
+
+.payment-option small{
+    color:var(--grey);
+}
+
+.booking-total{
+    margin-top:25px;
+
+    background:var(--dark);
+    color:white;
+
+    padding:20px;
+    border-radius:12px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.booking-total strong{
+    font-size:25px;
+}
+
+.book-submit{
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+
+    background:var(--blue);
+    color:white;
+
+    border:none;
+    border-radius:8px;
+
+    font-weight:bold;
+    font-size:15px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    z-index:10000;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.modal-content{
+    width:100%;
+    max-width:550px;
+
+    background:white;
+
+    border-radius:20px;
+    padding:30px;
+
+    position:relative;
+
+    max-height:90vh;
+    overflow:auto;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:15px;
+
+    font-size:25px;
+    cursor:pointer;
+}
+
+.modal-content h2{
+    margin-bottom:20px;
+}
+
+.car-review-stars{
+    color:#f6b800;
+    margin:5px 0 15px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:var(--dark);
+    color:white;
+    text-align:center;
+    padding:50px 6%;
+}
+
+footer p{
+    color:#98a2b3;
+    margin-top:10px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:900px){
+
+    .nav-links,
+    .nav-book{
+        display:none;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero p{
+        margin:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .vehicle-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .customizer-box{
+        grid-template-columns:1fr;
+    }
+
+    .review-layout{
+        grid-template-columns:1fr;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    section{
+        padding:70px 5%;
+    }
+
+    .hero{
+        padding:110px 5% 50px;
+    }
+
+    .hero h1{
+        font-size:50px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .vehicle-grid{
+        grid-template-columns:1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .payment-options{
+        grid-template-columns:1fr;
+    }
+
+    .booking-total{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .customizer-box{
+        padding:20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+<div class="logo">
+EV<span>MOTION</span>
+</div>
+
+<ul class="nav-links">
+
+<li>
+<a href="#home">Home</a>
+</li>
+
+<li>
+<a href="#vehicles">Vehicles</a>
+</li>
+
+<li>
+<a href="#customize">Customize</a>
+</li>
+
+<li>
+<a href="#reviews">Reviews</a>
+</li>
+
+<li>
+<a href="#booking">Book</a>
+</li>
+
+</ul>
+
+<button
+class="nav-book"
+onclick="goTo('booking')">
+
+Book Now
+
+</button>
+
+<div
+class="menu"
+onclick="toggleMobileMenu()">
+
+☰
+
+</div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section
+class="hero"
+id="home">
+
+<div>
+
+<div class="hero-small">
+
+THE FUTURE OF ELECTRIC MOBILITY
+
+</div>
+
+<h1>
+
+DRIVE<br>
+
+<span>YOUR WAY.</span>
+
+</h1>
+
+<p>
+
+Explore premium electric vehicles,
+configure your perfect vehicle and
+book your EV experience.
+
+</p>
+
+<div class="hero-buttons">
+
+<button
+class="primary"
+onclick="goTo('vehicles')">
+
+Explore Vehicles
+
+</button>
+
+<button
+class="secondary"
+onclick="goTo('customize')">
+
+Customize
+
+</button>
+
+</div>
+
+</div>
+
+<div class="hero-car">
+
+<img
+src="images/m2.jpg"
+alt="Electric vehicle">
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     VEHICLES
+========================= -->
+
+<section id="vehicles">
+
+<div class="section-title">
+
+<small>
+OUR COLLECTION
+</small>
+
+<h2>
+Choose Your EV
+</h2>
+
+<p>
+Explore our electric vehicle collection.
+</p>
+
+</div>
+
+<div class="vehicle-grid">
+
+
+<!-- M2 -->
+
+<div class="vehicle-card">
+
+<div class="vehicle-image">
+
+<img
+src="images/m2.jpg"
+alt="BMW i5">
+
+</div>
+
+<div class="vehicle-info">
+
+<h3>
+BMW i5 M60 xDrive
+</h3>
+
+<p>
+High-performance electric executive sedan
+combining luxury and BMW M performance.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong>601 hp</strong>
+<span>POWER</span>
+</div>
+
+<div class="stat">
+<strong>3.8 s</strong>
+<span>0-100</span>
+</div>
+
+<div class="stat">
+<strong>516 km</strong>
+<span>RANGE</span>
+</div>
+
+</div>
+
+<div class="card-buttons">
+
+<button
+class="card-button"
+onclick="selectVehicle('m2.jpg','BMW i5 M60 xDrive',11950000)">
+
+Customize
+
+</button>
+
+<button
+class="review-button"
+onclick="openReviewModal('BMW i5 M60 xDrive')">
+
+⭐ Reviews
+
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- M3 -->
+
+<div class="vehicle-card">
+
+<div class="vehicle-image">
+
+<img
+src="images/m3.jpg"
+alt="BMW i7">
+
+</div>
+
+<div class="vehicle-info">
+
+<h3>
+BMW i7 xDrive60
+</h3>
+
+<p>
+Luxury electric limousine designed for
+comfort, technology and refinement.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong>544 hp</strong>
+<span>POWER</span>
+</div>
+
+<div class="stat">
+<strong>4.7 s</strong>
+<span>0-100</span>
+</div>
+
+<div class="stat">
+<strong>625 km</strong>
+<span>RANGE</span>
+</div>
+
+</div>
+
+<div class="card-buttons">
+
+<button
+class="card-button"
+onclick="selectVehicle('m3.jpg','BMW i7 xDrive60',21000000)">
+
+Customize
+
+</button>
+
+<button
+class="review-button"
+onclick="openReviewModal('BMW i7 xDrive60')">
+
+⭐ Reviews
+
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- M4 -->
+
+<div class="vehicle-card">
+
+<div class="vehicle-image">
+
+<img
+src="images/m4.jpg"
+alt="BMW iX1">
+
+</div>
+
+<div class="vehicle-info">
+
+<h3>
+BMW iX1 xDrive30
+</h3>
+
+<p>
+Compact electric SUV combining everyday
+practicality with sporty performance.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong>313 hp</strong>
+<span>POWER</span>
+</div>
+
+<div class="stat">
+<strong>5.6 s</strong>
+<span>0-100</span>
+</div>
+
+<div class="stat">
+<strong>440 km</strong>
+<span>RANGE</span>
+</div>
+
+</div>
+
+<div class="card-buttons">
+
+<button
+class="card-button"
+onclick="selectVehicle('m4.jpg','BMW iX1 xDrive30',5240000)">
+
+Customize
+
+</button>
+
+<button
+class="review-button"
+onclick="openReviewModal('BMW iX1 xDrive30')">
+
+⭐ Reviews
+
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- M5 -->
+
+<div class="vehicle-card">
+
+<div class="vehicle-image">
+
+<img
+src="images/m5.jpg"
+alt="BMW iX">
+
+</div>
+
+<div class="vehicle-info">
+
+<h3>
+BMW iX xDrive50
+</h3>
+
+<p>
+Premium electric SUV combining spaciousness,
+technology and powerful performance.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong>523 hp</strong>
+<span>POWER</span>
+</div>
+
+<div class="stat">
+<strong>4.6 s</strong>
+<span>0-100</span>
+</div>
+
+<div class="stat">
+<strong>635 km</strong>
+<span>RANGE</span>
+</div>
+
+</div>
+
+<div class="card-buttons">
+
+<button
+class="card-button"
+onclick="selectVehicle('m5.jpg','BMW iX xDrive50',14000000)">
+
+Customize
+
+</button>
+
+<button
+class="review-button"
+onclick="openReviewModal('BMW iX xDrive50')">
+
+⭐ Reviews
+
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- M6 -->
+
+<div class="vehicle-card">
+
+<div class="vehicle-image">
+
+<img
+src="images/m6.png"
+alt="BMW i4">
+
+</div>
+
+<div class="vehicle-info">
+
+<h3>
+BMW i4 eDrive40
+</h3>
+
+<p>
+Sporty electric Gran Coupé combining
+dynamic driving with long range.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong>340 hp</strong>
+<span>POWER</span>
+</div>
+
+<div class="stat">
+<strong>5.7 s</strong>
+<span>0-100</span>
+</div>
+
+<div class="stat">
+<strong>590 km</strong>
+<span>RANGE</span>
+</div>
+
+</div>
+
+<div class="card-buttons">
+
+<button
+class="card-button"
+onclick="selectVehicle('m6.png','BMW i4 eDrive40',7300000)">
+
+Customize
+
+</button>
+
+<button
+class="review-button"
+onclick="openReviewModal('BMW i4 eDrive40')">
+
+⭐ Reviews
+
+</button>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CUSTOMIZER
+========================= -->
+
+<section
+class="customizer"
+id="customize">
+
+<div class="section-title">
+
+<small>
+BUILD YOUR EV
+</small>
+
+<h2>
+Customize Your Vehicle
+</h2>
+
+<p style="color:#aab4c0">
+Create your own configuration.
+</p>
+
+</div>
+
+
+<div class="customizer-box">
+
+<div>
+
+<div class="preview">
+
+<img
+id="customCar"
+src="images/m2.jpg"
+alt="Selected EV">
+
+</div>
+
+<div class="selected-summary">
+
+<h3 id="selectedName">
+BMW i5 M60 xDrive
+</h3>
+
+<p id="selectedColor">
+Exterior: Mineral White
+</p>
+
+<p id="selectedInterior">
+Interior: Standard
+</p>
+
+</div>
+
+</div>
+
+
+<div class="options">
+
+<label>
+Vehicle Model
+</label>
+
+<select
+id="vehicleSelect"
+onchange="changeVehicle()">
+
+<option value="m2.jpg|BMW i5 M60 xDrive|11950000">
+BMW i5 M60 xDrive
+</option>
+
+<option value="m3.jpg|BMW i7 xDrive60|21000000">
+BMW i7 xDrive60
+</option>
+
+<option value="m4.jpg|BMW iX1 xDrive30|5240000">
+BMW iX1 xDrive30
+</option>
+
+<option value="m5.jpg|BMW iX xDrive50|14000000">
+BMW iX xDrive50
+</option>
+
+<option value="m6.png|BMW i4 eDrive40|7300000">
+BMW i4 eDrive40
+</option>
+
+</select>
+
+
+<label>
+Exterior Colour
+</label>
+
+<div class="color-options">
+
+<button class="color black"
+onclick="selectColor('Black Sapphire',0)">
+</button>
+
+<button class="color white"
+onclick="selectColor('Mineral White',0)">
+</button>
+
+<button class="color blue"
+onclick="selectColor('Tanzanite Blue',100000)">
+</button>
+
+<button class="color red"
+onclick="selectColor('San Remo Red',125000)">
+</button>
+
+<button class="color grey"
+onclick="selectColor('Dravit Grey',75000)">
+</button>
+
+</div>
+
+
+<label>
+Wheel Design
+</label>
+
+<select id="wheels"
+onchange="calculatePrice()">
+
+<option value="0">
+Standard Wheels
+</option>
+
+<option value="75000">
+Sport Wheels + ₹75,000
+</option>
+
+<option value="150000">
+M Performance Wheels + ₹1,50,000
+</option>
+
+<option value="225000">
+Premium 21" Wheels + ₹2,25,000
+</option>
+
+</select>
+
+
+<label>
+Interior
+</label>
+
+<select id="interior"
+onchange="changeInterior()">
+
+<option value="0|Standard">
+Standard Interior
+</option>
+
+<option value="100000|Premium">
+Premium Leather + ₹1,00,000
+</option>
+
+<option value="200000|Luxury">
+Luxury Interior + ₹2,00,000
+</option>
+
+</select>
+
+
+<label>
+Comfort Seats
+</label>
+
+<select id="seats"
+onchange="calculatePrice()">
+
+<option value="0">
+Standard Seats
+</option>
+
+<option value="75000">
+Ventilated Seats + ₹75,000
+</option>
+
+<option value="125000">
+Massage + Ventilated Seats + ₹1,25,000
+</option>
+
+</select>
+
+
+<label>
+Audio System
+</label>
+
+<select id="sound"
+onchange="calculatePrice()">
+
+<option value="0">
+Standard Audio
+</option>
+
+<option value="75000">
+Premium Surround Sound + ₹75,000
+</option>
+
+<option value="200000">
+High-End Sound System + ₹2,00,000
+</option>
+
+</select>
+
+
+<label>
+Roof
+</label>
+
+<select id="roof"
+onchange="calculatePrice()">
+
+<option value="0">
+Standard Roof
+</option>
+
+<option value="150000">
+Panoramic Glass Roof + ₹1,50,000
+</option>
+
+</select>
+
+
+<label>
+Technology Package
+</label>
+
+<select id="technology"
+onchange="calculatePrice()">
+
+<option value="0">
+Standard Technology
+</option>
+
+<option value="125000">
+Technology Package + ₹1,25,000
+</option>
+
+<option value="250000">
+Advanced Technology + ₹2,50,000
+</option>
+
+</select>
+
+
+<label>
+Driver Assistance
+</label>
+
+<select id="assistance"
+onchange="calculatePrice()">
+
+<option value="0">
+Standard Assistance
+</option>
+
+<option value="100000">
+Driving Assistance + ₹1,00,000
+</option>
+
+<option value="200000">
+Advanced Assistance + ₹2,00,000
+</option>
+
+</select>
+
+
+<label>
+Charging Package
+</label>
+
+<select id="charging"
+onchange="calculatePrice()">
+
+<option value="0">
+Standard Charging
+</option>
+
+<option value="50000">
+Home Wallbox + ₹50,000
+</option>
+
+<option value="100000">
+Premium Charging + ₹1,00,000
+</option>
+
+</select>
+
+
+<div class="price-box">
+
+<span>
+ESTIMATED CONFIGURATION PRICE
+</span>
+
+<div class="price">
+₹ <span id="price">1,19,50,000</span>
+</div>
+
+</div>
+
+
+<button
+class="primary customize-book"
+onclick="bookCustomized()">
+
+Book This Configuration
+
+</button>
+
+
+<button
+class="save-button"
+onclick="saveConfiguration()">
+
+♡ Save Configuration
+
+</button>
+
+</div>
+
+</div>
+
+  </section>
+  <!-- =========================
+     FEATURES
+========================= -->
+
+<section>
+
+<div class="section-title">
+
+<small>WHY EV MOTION</small>
+
+<h2>Electric, Your Way</h2>
+
+<p>Everything you need to choose your next electric vehicle.</p>
+
+</div>
+
+
+<div class="features">
+
+<div class="feature">
+
+<div class="feature-icon">⚡</div>
+
+<h3>Electric Performance</h3>
+
+<p>
+Instant torque, smooth acceleration and
+quiet electric driving.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">🔋</div>
+
+<h3>Long Range</h3>
+
+<p>
+Choose an EV designed for both city
+driving and long journeys.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">🎨</div>
+
+<h3>Customize</h3>
+
+<p>
+Choose colours, wheels, interiors,
+technology and more.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">🛡️</div>
+
+<h3>Premium Experience</h3>
+
+<p>
+A simple and modern way to explore
+and book your next EV.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     REVIEWS
+========================= -->
+
+<section
+class="reviews-section"
+id="reviews">
+
+<div class="section-title">
+
+<small>CUSTOMER EXPERIENCE</small>
+
+<h2>What Our Customers Say</h2>
+
+<p>
+Read reviews from EV MOTION customers.
+</p>
+
+</div>
+
+
+<div class="review-layout">
+
+
+<div class="review-summary">
+
+<div class="big-rating"
+id="averageRating">
+4.8
+</div>
+
+<div class="stars">
+★★★★★
+</div>
+
+<p>
+Based on customer reviews
+</p>
+
+<br>
+
+<p>
+Share your experience after exploring
+or purchasing a vehicle from EV MOTION.
+</p>
+
+</div>
+
+
+<div
+class="review-list"
+id="reviewList">
+
+
+<div class="review-card">
+
+<div class="review-header">
+
+<div class="review-name">
+Rahul
+</div>
+
+<div class="review-date">
+Verified Customer
+</div>
+
+</div>
+
+<div class="car-review-title">
+BMW i5 M60 xDrive
+</div>
+
+<div class="stars">
+★★★★★
+</div>
+
+<p class="review-text">
+
+The customization options are excellent.
+The website makes it very easy to compare
+different configurations.
+
+</p>
+
+</div>
+
+
+
+<div class="review-card">
+
+<div class="review-header">
+
+<div class="review-name">
+Aarav
+</div>
+
+<div class="review-date">
+Verified Customer
+</div>
+
+</div>
+
+<div class="car-review-title">
+BMW i7 xDrive60
+</div>
+
+<div class="stars">
+★★★★★
+</div>
+
+<p class="review-text">
+
+The i7 feels extremely premium. I liked
+being able to select the interior and
+technology packages before booking.
+
+</p>
+
+</div>
+
+
+
+<div class="review-card">
+
+<div class="review-header">
+
+<div class="review-name">
+Priya
+</div>
+
+<div class="review-date">
+Verified Customer
+</div>
+
+</div>
+
+<div class="car-review-title">
+BMW iX1 xDrive30
+</div>
+
+<div class="stars">
+★★★★☆
+</div>
+
+<p class="review-text">
+
+Very clean website and the vehicle
+information is easy to understand.
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- REVIEW FORM -->
+
+<div class="review-form">
+
+<h3>
+Write a Review
+</h3>
+
+<br>
+
+<input
+type="text"
+id="reviewName"
+class="form-control"
+placeholder="Your name">
+
+
+<select
+id="reviewCar"
+class="form-control">
+
+<option>
+BMW i5 M60 xDrive
+</option>
+
+<option>
+BMW i7 xDrive60
+</option>
+
+<option>
+BMW iX1 xDrive30
+</option>
+
+<option>
+BMW iX xDrive50
+</option>
+
+<option>
+BMW i4 eDrive40
+</option>
+
+</select>
+
+
+<div>
+
+<p style="font-size:13px;font-weight:bold">
+Your Rating
+</p>
+
+<div
+class="rating-input"
+id="ratingInput">
+
+<span onclick="setRating(1)">★</span>
+<span onclick="setRating(2)">★</span>
+<span onclick="setRating(3)">★</span>
+<span onclick="setRating(4)">★</span>
+<span onclick="setRating(5)">★</span>
+
+</div>
+
+</div>
+
+
+<textarea
+id="reviewText"
+class="form-control"
+placeholder="Write your review...">
+</textarea>
+
+
+<button
+class="submit-review"
+onclick="submitReview()">
+
+Submit Review
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     BOOKING
+========================= -->
+
+<section
+class="booking"
+id="booking">
+
+<div class="section-title">
+
+<small>BOOK YOUR EV</small>
+
+<h2>Complete Your Booking</h2>
+
+<p>
+Choose your vehicle, enter your details
+and select a payment method.
+</p>
+
+</div>
+
+
+<div class="booking-box">
+
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Full Name
+</label>
+
+<input
+type="text"
+id="customerName"
+placeholder="Enter your full name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Mobile Number
+</label>
+
+<input
+type="tel"
+id="customerPhone"
+placeholder="+91 XXXXX XXXXX">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Email Address
+</label>
+
+<input
+type="email"
+id="customerEmail"
+placeholder="example@email.com">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Preferred Delivery Date
+</label>
+
+<input
+type="date"
+id="deliveryDate">
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Selected Vehicle
+</label>
+
+<select id="bookingVehicle">
+
+<option value="BMW i5 M60 xDrive|11950000">
+BMW i5 M60 xDrive
+</option>
+
+<option value="BMW i7 xDrive60|21000000">
+BMW i7 xDrive60
+</option>
+
+<option value="BMW iX1 xDrive30|5240000">
+BMW iX1 xDrive30
+</option>
+
+<option value="BMW iX xDrive50|14000000">
+BMW iX xDrive50
+</option>
+
+<option value="BMW i4 eDrive40|7300000">
+BMW i4 eDrive40
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+
+<!-- PAYMENT -->
+
+<div class="payment-box">
+
+<h3>
+Select Payment Method
+</h3>
+
+
+<div class="payment-options">
+
+
+<label class="payment-option">
+
+<input
+type="radio"
+name="payment"
+value="UPI"
+checked>
+
+<strong>📱 UPI</strong>
+
+<small>
+Google Pay / PhonePe / Paytm / UPI
+</small>
+
+</label>
+
+
+<label class="payment-option">
+
+<input
+type="radio"
+name="payment"
+value="Card">
+
+<strong>💳 Credit / Debit Card</strong>
+
+<small>
+Visa / Mastercard / RuPay
+</small>
+
+</label>
+
+
+<label class="payment-option">
+
+<input
+type="radio"
+name="payment"
+value="Net Banking">
+
+<strong>🏦 Net Banking</strong>
+
+<small>
+All major Indian banks
+</small>
+
+</label>
+
+
+<label class="payment-option">
+
+<input
+type="radio"
+name="payment"
+value="EMI">
+
+<strong>📆 Vehicle Finance / EMI</strong>
+
+<small>
+Finance your vehicle purchase
+</small>
+
+</label>
+
+</div>
+
+
+<div class="booking-total">
+
+<div>
+
+<p style="color:#98a2b3;font-size:12px">
+SELECTED VEHICLE
+</p>
+
+<strong id="bookingVehicleName">
+BMW i5 M60 xDrive
+</strong>
+
+</div>
+
+
+<div>
+
+<p style="color:#98a2b3;font-size:12px">
+ESTIMATED PRICE
+</p>
+
+<strong>
+₹ <span id="bookingPrice">
+1,19,50,000
+</span>
+</strong>
+
+</div>
+
+</div>
+
+
+<button
+class="book-submit"
+onclick="confirmBooking()">
+
+Continue to Payment
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     REVIEW MODAL
+========================= -->
+
+<div
+class="modal"
+id="reviewModal">
+
+<div class="modal-content">
+
+<span
+class="close"
+onclick="closeModal('reviewModal')">
+
+×
+</span>
+
+
+<h2 id="modalCarName">
+Vehicle Reviews
+</h2>
+
+
+<div
+id="modalReviews">
+
+<div class="review-card">
+
+<div class="review-name">
+Rahul
+</div>
+
+<div class="stars">
+★★★★★
+</div>
+
+<p class="review-text">
+Excellent vehicle and premium driving
+experience.
+</p>
+
+</div>
+
+
+<div class="review-card">
+
+<div class="review-name">
+Ananya
+</div>
+
+<div class="stars">
+★★★★★
+</div>
+
+<p class="review-text">
+Beautiful design and impressive technology.
+</p>
+
+</div>
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%;margin-top:20px"
+onclick="closeModal('reviewModal')">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     SUCCESS MODAL
+========================= -->
+
+<div
+class="modal"
+id="successModal">
+
+<div class="modal-content"
+style="text-align:center">
+
+<div style="font-size:60px">
+✓
+</div>
+
+<h2>
+Booking Request Received
+</h2>
+
+<p
+id="successMessage"
+style="
+color:#667085;
+line-height:1.6;
+margin:15px 0;
+">
+
+Your booking request has been received.
+
+</p>
+
+<button
+class="primary"
+style="width:100%"
+onclick="closeModal('successModal')">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div class="logo">
+EV<span>MOTION</span>
+</div>
+
+<p>
+The future of electric mobility.
+</p>
+
+<p style="margin-top:25px;font-size:12px">
+© 2026 EV MOTION. All rights reserved.
+</p>
+
+</footer>
+
+
+
+<script>
+
+/* =====================================
+   GLOBAL VARIABLES
+===================================== */
+
+let selectedBasePrice = 11950000;
+
+let selectedColorPrice = 0;
+
+let currentRating = 0;
+
+
+/* =====================================
+   NAVIGATION
+===================================== */
+
+function goTo(section){
+
+    document.getElementById(section)
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+function toggleMobileMenu(){
+
+    const links =
+    document.querySelector(".nav-links");
+
+    if(links.style.display === "flex"){
+
+        links.style.display = "none";
+
+    }else{
+
+        links.style.display = "flex";
+
+        links.style.position = "absolute";
+
+        links.style.top = "75px";
+
+        links.style.left = "0";
+
+        links.style.width = "100%";
+
+        links.style.background = "white";
+
+        links.style.padding = "25px";
+
+        links.style.flexDirection = "column";
+
+    }
+
+}
+
+
+/* =====================================
+   VEHICLE SELECTION
+===================================== */
+
+function selectVehicle(
+    image,
+    name,
+    price
+){
+
+    document.getElementById("customCar")
+    .src = "images/" + image;
+
+    document.getElementById("selectedName")
+    .innerText = name;
+
+    selectedBasePrice = price;
+
+    document.getElementById("vehicleSelect").value =
+        image + "|" + name + "|" + price;
+
+    calculatePrice();
+
+    goTo("customize");
+
+}
+
+
+/* =====================================
+   CUSTOMIZER VEHICLE
+===================================== */
+
+function changeVehicle(){
+
+    const value =
+    document.getElementById("vehicleSelect").value;
+
+    const data = value.split("|");
+
+    const image = data[0];
+
+    const name = data[1];
+
+    selectedBasePrice =
+    Number(data[2]);
+
+
+    document.getElementById("customCar")
+    .src = "images/" + image;
+
+    document.getElementById("selectedName")
+    .innerText = name;
+
+
+    calculatePrice();
+
+}
+
+
+/* =====================================
+   COLOUR
+===================================== */
+
+function selectColor(
+    colorName,
+    price
+){
+
+    selectedColorPrice = price;
+
+    document.getElementById("selectedColor")
+    .innerText =
+    "Exterior: " + colorName;
+
+    calculatePrice();
+
+}
+
+
+/* =====================================
+   INTERIOR
+===================================== */
+
+function changeInterior(){
+
+    const value =
+    document.getElementById("interior").value;
+
+    const data =
+    value.split("|");
+
+
+    document.getElementById("selectedInterior")
+    .innerText =
+    "Interior: " + data[1];
+
+
+    calculatePrice();
+
+}
+
+
+/* =====================================
+   PRICE CALCULATOR
+===================================== */
+
+function calculatePrice(){
+
+    let total =
+    selectedBasePrice;
+
+    total += selectedColorPrice;
+
+    total += Number(
+        document.getElementById("wheels").value
+    );
+
+    total += Number(
+        document.getElementById("interior")
+        .value
+        .split("|")[0]
+    );
+
+    total += Number(
+        document.getElementById("seats").value
+    );
+
+    total += Number(
+        document.getElementById("sound").value
+    );
+
+    total += Number(
+        document.getElementById("roof").value
+    );
+
+    total += Number(
+        document.getElementById("technology").value
+    );
+
+    total += Number(
+        document.getElementById("assistance").value
+    );
+
+    total += Number(
+        document.getElementById("charging").value
+    );
+
+
+    document.getElementById("price")
+    .innerText =
+    total.toLocaleString("en-IN");
+
+
+    return total;
+
+}
+
+
+/* =====================================
+   SAVE CONFIGURATION
+===================================== */
+
+function saveConfiguration(){
+
+    const price =
+    calculatePrice();
+
+    localStorage.setItem(
+        "evConfiguration",
+        JSON.stringify({
+
+            vehicle:
+            document.getElementById(
+                "selectedName"
+            ).innerText,
+
+            color:
+            document.getElementById(
+                "selectedColor"
+            ).innerText,
+
+            interior:
+            document.getElementById(
+                "selectedInterior"
+            ).innerText,
+
+            price:price
+
+        })
+    );
+
+
+    alert(
+        "✓ Configuration saved successfully!"
+    );
+
+}
+
+
+/* =====================================
+   BOOK CUSTOM CONFIGURATION
+===================================== */
+
+function bookCustomized(){
+
+    const price =
+    calculatePrice();
+
+    const vehicle =
+    document.getElementById(
+        "selectedName"
+    ).innerText;
+
+
+    const bookingSelect =
+    document.getElementById(
+        "bookingVehicle"
+    );
+
+
+    for(
+        let option of bookingSelect.options
+    ){
+
+        if(
+            option.value.startsWith(vehicle + "|")
+        ){
+
+            option.selected = true;
+
+            break;
+
+        }
+
+    }
+
+
+    document.getElementById(
+        "bookingVehicleName"
+    ).innerText = vehicle;
+
+
+    document.getElementById(
+        "bookingPrice"
+    ).innerText =
+    price.toLocaleString("en-IN");
+
+
+    goTo("booking");
+
+}
+
+
+/* =====================================
+   BOOKING VEHICLE CHANGE
+===================================== */
+
+document
+.getElementById("bookingVehicle")
+.addEventListener(
+    "change",
+    updateBookingPrice
+);
+
+
+function updateBookingPrice(){
+
+    const value =
+    document.getElementById(
+        "bookingVehicle"
+    ).value;
+
+    const data =
+    value.split("|");
+
+
+    document.getElementById(
+        "bookingVehicleName"
+    ).innerText =
+    data[0];
+
+
+    document.getElementById(
+        "bookingPrice"
+    ).innerText =
+    Number(data[1])
+    .toLocaleString("en-IN");
+
+}
+
+
+/* =====================================
+   STAR RATING
+===================================== */
+
+function setRating(number){
+
+    currentRating = number;
+
+    const stars =
+    document.querySelectorAll(
+        "#ratingInput span"
+    );
+
+
+    stars.forEach(
+        (star,index)=>{
+
+            if(index < number){
+
+                star.classList.add("active");
+
+            }else{
+
+                star.classList.remove("active");
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   SUBMIT REVIEW
+===================================== */
+
+function submitReview(){
+
+    const name =
+    document.getElementById(
+        "reviewName"
+    ).value.trim();
+
+
+    const car =
+    document.getElementById(
+        "reviewCar"
+    ).value;
+
+
+    const text =
+    document.getElementById(
+        "reviewText"
+    ).value.trim();
+
+
+    if(!name){
+
+        alert(
+            "Please enter your name."
+        );
+
+        return;
+
+    }
+
+
+    if(currentRating === 0){
+
+        alert(
+            "Please select a rating."
+        );
+
+        return;
+
+    }
+
+
+    if(!text){
+
+        alert(
+            "Please write a review."
+        );
+
+        return;
+
+    }
+
+
+    const stars =
+    "★".repeat(currentRating)
+    +
+    "☆".repeat(5-currentRating);
+
+
+    const card =
+    document.createElement("div");
+
+
+    card.className =
+    "review-card";
+
+
+    card.innerHTML = `
+
+        <div class="review-header">
+
+            <div class="review-name">
+                ${escapeHTML(name)}
+            </div>
+
+            <div class="review-date">
+                Just now
+            </div>
+
+        </div>
+
+        <div class="car-review-title">
+            ${escapeHTML(car)}
+        </div>
+
+        <div class="stars">
+            ${stars}
+        </div>
+
+        <p class="review-text">
+            ${escapeHTML(text)}
+        </p>
+
+    `;
+
+
+    document
+    .getElementById("reviewList")
+    .prepend(card);
+
+
+    document.getElementById(
+        "reviewName"
+    ).value = "";
+
+
+    document.getElementById(
+        "reviewText"
+    ).value = "";
+
+
+    currentRating = 0;
+
+    setRating(0);
+
+
+    alert(
+        "✓ Thank you! Your review has been added."
+    );
+
+}
+
+
+/* =====================================
+   SECURITY HELPER
+===================================== */
+
+function escapeHTML(text){
+
+    const div =
+    document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =====================================
+   VEHICLE REVIEW MODAL
+===================================== */
+
+function openReviewModal(vehicle){
+
+    document.getElementById(
+        "modalCarName"
+    ).innerText =
+    vehicle + " Reviews";
+
+
+    const modal =
+    document.getElementById(
+        "reviewModal"
+    );
+
+
+    modal.style.display =
+    "flex";
+
+}
+
+
+function closeModal(id){
+
+    document.getElementById(id)
+    .style.display = "none";
+
+}
+
+
+/* =====================================
+   BOOKING
+===================================== */
+
+function confirmBooking(){
+
+    const name =
+    document.getElementById(
+        "customerName"
+    ).value.trim();
+
+
+    const phone =
+    document.getElementById(
+        "customerPhone"
+    ).value.trim();
+
+
+    const email =
+    document.getElementById(
+        "customerEmail"
+    ).value.trim();
+
+
+    const date =
+    document.getElementById(
+        "deliveryDate"
+    ).value;
+
+
+    const payment =
+    document.querySelector(
+        'input[name="payment"]:checked'
+    );
+
+
+    if(!name){
+
+        alert(
+            "Please enter your name."
+        );
+
+        return;
+
+    }
+
+
+    if(!phone){
+
+        alert(
+            "Please enter your mobile number."
+        );
+
+        return;
+
+    }
+
+
+    if(!email){
+
+        alert(
+            "Please enter your email."
+        );
+
+        return;
+
+    }
+
+
+    if(!date){
+
+        alert(
+            "Please select a delivery date."
+        );
+
+        return;
+
+    }
+
+
+    if(!payment){
+
+        alert(
+            "Please select a payment method."
+        );
+
+        return;
+
+    }
+
+
+    const vehicle =
+    document.getElementById(
+        "bookingVehicleName"
+    ).innerText;
+
+
+    const price =
+    document.getElementById(
+        "bookingPrice"
+    ).innerText;
+
+
+    document.getElementById(
+        "successMessage"
+    ).innerHTML = `
+
+        Thank you,
+        <strong>${escapeHTML(name)}</strong>!
+
+        <br><br>
+
+        Your booking request for
+        <strong>${escapeHTML(vehicle)}</strong>
+        has been received.
+
+        <br><br>
+
+        Estimated price:
+        <strong>₹${price}</strong>
+
+        <br><br>
+
+        Selected payment method:
+        <strong>${escapeHTML(payment.value)}</strong>
+
+        <br><br>
+
+        Our team will contact you with
+        the next steps.
+
+    `;
+
+
+    document.getElementById(
+        "successModal"
+    ).style.display = "flex";
+
+}
+
+
+/* =====================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+===================================== */
+
+window.addEventListener(
+    "click",
+    function(event){
+
+        const reviewModal =
+        document.getElementById(
+            "reviewModal"
+        );
+
+        const successModal =
+        document.getElementById(
+            "successModal"
+        );
+
+
+        if(event.target === reviewModal){
+
+            reviewModal.style.display =
+            "none";
+
+        }
+
+
+        if(event.target === successModal){
+
+            successModal.style.display =
+            "none";
+
+        }
+
+    }
+);
+
+
+/* =====================================
+   LOAD SAVED CONFIGURATION
+===================================== */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        const saved =
+        localStorage.getItem(
+            "evConfiguration"
+        );
+
+
+        if(saved){
+
+            console.log(
+                "Saved EV configuration:",
+                JSON.parse(saved)
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
